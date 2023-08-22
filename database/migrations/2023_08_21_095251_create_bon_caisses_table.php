@@ -26,7 +26,14 @@ return new class extends Migration
             $table->float('montant_paye');
             $table->float('avance_perçue');
             $table->string('motif_operation');
+            $table->string('type');
             // $table->string('executant');
+
+            $table->foreignId('beneficiaire_id');
+            $table->foreign('beneficiaire_id')
+                ->references('id')
+                ->on('beneficiaires')
+                ->onDelete('cascade');
 
             $table->foreignId('user_id');
             $table->foreign('user_id')

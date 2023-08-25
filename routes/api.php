@@ -22,3 +22,7 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
 });
+
+//routes for bon_versement
+
+Route::post('bon_versement', 'App\Http\Controllers\BonVersementController@store');

@@ -26,3 +26,4 @@ Route::group([
 //routes for bon_versement
 
 Route::post('bon_versement', 'App\Http\Controllers\BonVersementController@store');
+Route::post('bon_versement/{id}/update', 'App\Http\Controllers\BonVersementController@update');

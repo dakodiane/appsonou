@@ -44,19 +44,12 @@ class BonVersementController extends Controller
                 'objet_versement' => 'required',
                 'motif_versement' => 'required',
                 'montant' => 'required|numeric',
-
                 'date_versement' => 'required|date',
                 'user_id' => 'required|exists:users,id',
 
             ]);
 
 
-                'date_versement' => 'required|date', 
-                'user_id' => 'required|exists:users,id',    
-
-            ]);
-            
->>>>>>>>> Temporary merge branch 2
             $bon = new BonVersement;
             $bon->code = $request->code;
             $bon->nom_deposant = $request->nom_deposant;
@@ -76,62 +69,7 @@ class BonVersementController extends Controller
 
     }
 
-    // public function storeFacture(Request $request)
-    // {
-    //     try {
-    //         $validator = Validator::make($request->all(), [
-    //             'id' => 'required|exists:bon_caisses',
-    //             'categorie_id' => 'required|exists:categories,id',
-    //             'beneficiaire_id' => 'required|exists:beneficiaires,id',
-    //             'motif_operation' => 'required',
-    //             'montant_facture' => 'required|numeric',
-    //             'montant_imposable' => 'required|numeric',
-    //             'montant_aib' => 'required|numeric',
-    //             'taux_ab' => 'required|in:0.01,0.03,0.05',
-    //             'avance_perçue' => 'required|numeric',
-    //         ]);
-
-    //         if ($validator->fails()) {
-    //             return response()->json(['errors' => $validator->errors()], 400);
-    //         }
-
-    //         // Recherchez la facture existante
-    //         $facture = BonCaisse::where('id', $request->id)->first();
-
-    //         if (!$facture) {
-    //             return response()->json(['message' => 'Facture non trouvée.'], 404);
-    //         }
-
-    //         // Calculer le montant AIB
-    //         $montantAIB = $request->montant_imposable * $request->taux_ab;
-
-    //         // Calculer le montant net à payer
-    //         $montantNetAPayer = $request->montant_facture - $montantAIB;
-
-    //         // Vérifier si le montant net à payer est inférieur à 100 000
-    //         if ($montantNetAPayer > 100000) {
-    //             return response()->json(['message' => 'Le montant net à payer dépasse 100 000.'], 400);
-    //         }
-
-    //         // Ajoutez les détails du paiement à la facture
-    //         $facture->beneficiaire_id = $request->beneficiaire_id;
-    //         $facture->montant_facture = $request->montant_facture;
-    //         $facture->motif_operation = $request->motif_operation;
-    //         $facture->date_emission = $request->date_emission;
-    //         $facture->avance_perçue = $request->avance_perçue;
-    //         $facture->montant_imposable = $request->montant_imposable;
-    //         $facture->taux_ab = $request->taux_ab;
-    //         $facture->montant_aib = $montantAIB;
-    //         $facture->montant_paye = $montantNetAPayer;
-
-    //         $facture->save();
-
-    //         return response()->json(['message' => 'Paiement de facture enregistré avec succès']);
-    //     } catch (\Exception $e) {
-    //         // Gérer l'exception ici
-    //         return response()->json(['error' => 'Une erreur est survenue lors de lenregistrement de la facture.'], 500);
-    //     }
-    // }
+   
 
     /**
      * Display the specified resource.
@@ -166,7 +104,7 @@ class BonVersementController extends Controller
     {
 
         try {
-            // Recherchez le bon de caisse en fonction de son ID et du bénéficiaire
+            // Recherchez le bon de versement en fonction de son ID 
             $bon = BonVersement::where('id', $id)
                 ->first();
 

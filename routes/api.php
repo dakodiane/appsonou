@@ -28,6 +28,8 @@ Route::group([
 
     Route::post('create-bon-versement', [ApiController::class,'createBonVersement']);
 
+    Route::post('update-bon-versement/{id}', [ApiController::class,'updateBonVersement']);
+
     // Bon de caisse endpoints
 
     Route::post('create-facture', [ApiController::class,'createFacture']);

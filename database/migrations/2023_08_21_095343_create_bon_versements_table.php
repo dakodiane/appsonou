@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('bon_versements', function (Blueprint $table) {
             $table->id();
 
-            $table->string('code');
-            $table->string('nom_deposant');
-            $table->string('objet_versement');
-            $table->string('motif_versement');
-            $table->float('montant');
-            $table->date('date_versement');
+            $table->string('code')->nullable();
+            $table->string('nom_deposant')->nullable();
+            $table->string('objet_versement')->nullable();
+            $table->string('motif_versement')->nullable();
+            $table->float('montant')->nullable();
+            $table->date('date_versement')->nullable();
 
             $table->foreignId('user_id');
             $table->foreign('user_id')

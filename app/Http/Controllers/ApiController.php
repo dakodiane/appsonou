@@ -22,6 +22,13 @@ class ApiController extends Controller
 
     }
 
+    public function updateBonVersement(Request $request, $id)
+    {
+        $controller = new BonVersementController;
+
+        return $controller->update($request,$id);
+    }
+
     // Bon de caisse
 
     public function createFacture(Request $request)

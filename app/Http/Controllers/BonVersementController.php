@@ -48,7 +48,6 @@ class BonVersementController extends Controller
                 'user_id' => 'required|exists:users,id',
 
             ]);
-
             $bon = new BonVersement;
             $bon->code = $request->code;
             $bon->nom_deposant = $request->nom_deposant;
@@ -125,7 +124,6 @@ class BonVersementController extends Controller
     //     }
     // }
 
-
     /**
      * Display the specified resource.
      *
@@ -157,7 +155,33 @@ class BonVersementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        try {
+            // Recherchez le bon de caisse en fonction de son ID et du bénéficiaire
+            $bon = BonVersement::where('id', $id)
+                ->first();
+
+            if (!$bon) {
+                return response()->json(['message' => 'Bon de Versement introuvable'], 404);
+            }
+
+            // Mettez à jour les attributs du bon de Versement en fonction de la demande
+
+            $bon->code = $request->code;
+            $bon->nom_deposant = $request->nom_deposant;
+            $bon->objet_versement = $request->objet_versement;
+            $bon->motif_versement = $request->motif_versement;
+            $bon->montant = $request->montant;
+
+
+            $bon->save();
+
+            return response()->json(['message' => 'Bon de versement mis à jour avec succès']);
+        } catch (\Exception $e) {
+            // Gérer l'exception ici
+            return response()->json(['error' => 'Une erreur est survenue lors de la mise à jour du bon de versement.'], 500);
+        }
+
     }
 
     /**

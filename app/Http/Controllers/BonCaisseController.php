@@ -39,7 +39,7 @@ class BonCaisseController extends Controller
     
             $bon->save();
             
-            return response()->json(['message' => 'Facture enregistrée avec succès']);
+            return response()->json(['message' => 'Facture enregistrée avec succès'],200);
         } catch (\Exception $e) {
             
             return response()->json(['error' => 'Une erreur est survenue lors de lenregistrement de la facture.'], 500);
@@ -63,6 +63,7 @@ class BonCaisseController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'id' => 'required|exists:bon_caisses',
+                'code' => 'required',
                 'categorie_id' => 'required|exists:categories,id',
                 'beneficiaire_id' => 'required|exists:beneficiaires,id',
                 'motif_operation' => 'required',
@@ -98,6 +99,7 @@ class BonCaisseController extends Controller
             // Ajoutez les détails du paiement à la facture
             $facture->beneficiaire_id = $request->beneficiaire_id;
             $facture->montant_facture = $request->montant_facture;
+            $facture->code = $request->code;
             $facture->motif_operation = $request->motif_operation;
             $facture->date_emission = $request->date_emission;
             $facture->avance_perçue = $request->avance_perçue;
@@ -108,7 +110,7 @@ class BonCaisseController extends Controller
     
             $facture->save();
     
-            return response()->json(['message' => 'Paiement de facture enregistré avec succès']);
+            return response()->json(['message' => 'Paiement de facture enregistré avec succès'],200);
         } catch (\Exception $e) {
             // Gérer l'exception ici
             return response()->json(['error' => 'Une erreur est survenue lors de lenregistrement de la facture.'], 500);
@@ -124,6 +126,7 @@ class BonCaisseController extends Controller
             $request->validate([
                 'categorie_id' => 'required|exists:categories,id',
                 'beneficiaire_id' => 'required|exists:beneficiaires,id',
+                'code' => 'required',
                 'montant_facture' => 'required|numeric',
                 'avance_perçue' => 'required|numeric',
                 'date_emission' => 'required|date',
@@ -134,6 +137,7 @@ class BonCaisseController extends Controller
             $avance = new BonCaisse;
             $avance->type = 'avance';
             $avance->beneficiaire_id = $request->beneficiaire_id;
+            $avance->code = $request->code;
             $avance->montant_facture = $request->montant_facture;
             $avance->date_emission = $request->date_emission;
             $avance->avance_perçue = $request->avance_perçue;
@@ -142,7 +146,7 @@ class BonCaisseController extends Controller
     
             $avance->save();
     
-            return response()->json(['message' => 'Paiement d\'avance effectué avec succès']);
+            return response()->json(['message' => 'Paiement d\'avance effectué avec succès'],200);
         } catch (\Exception $e) {
             // Gérer l'exception ici
             return response()->json(['error' => 'Une erreur est survenue lors du paiement de l\'avance.'], 500);
@@ -156,6 +160,7 @@ class BonCaisseController extends Controller
             $request->validate([
                 'categorie_id' => 'required|exists:categories,id',
                 'beneficiaire_id' => 'required|exists:beneficiaires,id',
+                'code' => 'required',
                 'montant_facture' => 'required|numeric',
                 'date_emission' => 'required|date',
                 'motif_operation' => 'required',
@@ -165,6 +170,7 @@ class BonCaisseController extends Controller
             $autres = new BonCaisse;
             $autres->type = 'autres';
             $autres->beneficiaire_id = $request->beneficiaire_id;
+             $autres->code = $request->code;
             $autres->montant_facture = $request->montant_facture;
             $autres->date_emission = $request->date_emission;
             $autres->motif_operation = $request->motif_operation;
@@ -172,7 +178,7 @@ class BonCaisseController extends Controller
     
             $autres->save();
             
-            return response()->json(['message' => 'Paiement effectué avec succès']);
+            return response()->json(['message' => 'Paiement effectué avec succès'],200);
         } catch (\Exception $e) {
             // Gérer l'exception ici
             return response()->json(['error' => 'Une erreur est survenue lors du paiement.'], 500);
@@ -261,7 +267,7 @@ class BonCaisseController extends Controller
         
             $bon->save();
         
-            return response()->json(['message' => 'Bon de caisse mis à jour avec succès']);
+            return response()->json(['message' => 'Bon de caisse mis à jour avec succès'],200);
         } catch (\Exception $e) {
             // Gérer l'exception ici
             return response()->json(['error' => 'Une erreur est survenue lors de la mise à jour du bon de caisse.'], 500);

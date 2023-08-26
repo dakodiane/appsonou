@@ -60,7 +60,7 @@ class BonVersementController extends Controller
 
             $bon->save();
 
-            return response()->json(['message' => 'Bon de versement créé avec succès']);
+            return response()->json(['message' => 'Bon de versement créé avec succès'], 200);
            
         } catch (\Exception $e) {
             return response()->json(['error' => 'Une erreur est survenue lors de lenregistrement du bon de versement.', $e], 500);
@@ -121,7 +121,7 @@ class BonVersementController extends Controller
         
             $bon->save();
         
-            return response()->json(['message' => 'Bon de versement mis à jour avec succès']);
+            return response()->json(['message' => 'Bon de versement mis à jour avec succès.'], 200);
         } catch (\Exception $e) {
             // Gérer l'exception ici
             return response()->json(['error' => 'Une erreur est survenue lors de la mise à jour du bon de versement.'], 500);

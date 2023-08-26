@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -21,12 +23,26 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
-});
 
-Route::post('bons_caisse/facture', 'App\Http\Controllers\BonCaisseController@createFacture');
-Route::post('facture', 'App\Http\Controllers\BonCaisseController@storeFacture');
-Route::post('bons_caisse/avance', 'App\Http\Controllers\BonCaisseController@createAvance');
-Route::post('bons_caisse/autres', 'App\Http\Controllers\BonCaisseController@createAutres');
-Route::get('/bons_caisse/{date_emission}/{beneficiaire_id}/show', 'App\Http\Controllers\BonCaisseController@show');
-Route::put('/bons_caisse/{id}/{beneficiaire_id}/update', 'App\Http\Controllers\BonCaisseController@update');
+    // Bon de versement endpoints
+
+    Route::post('create-bon-versement', [ApiController::class,'createBonVersement']);
+
+    Route::post('update-bon-versement/{id}', [ApiController::class,'updateBonVersement']);
+
+    // Bon de caisse endpoints
+
+    Route::post('create-facture', [ApiController::class,'createFacture']);
+
+    Route::post('save-facture', [ApiController::class,'saveFacture']);
+
+    Route::post('create-avance', [ApiController::class,'createAvance']);
+
+    Route::post('create-autre', [ApiController::class,'createAutre']);
+
+    Route::get('get-bon-caisse', [ApiController::class,'getBonCaisse']);
+
+    Route::post('update-bon-caisse/{id}/{beneficiaire_id}', [ApiController::class,'updateBonCaisse']);
+
+});
 

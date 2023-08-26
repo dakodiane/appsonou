@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -21,6 +23,25 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
+
+    // Bon de versement endpoints
+
+    Route::post('create-bon-versement', [ApiController::class,'createBonVersement']);
+
+    // Bon de caisse endpoints
+
+    Route::post('create-facture', [ApiController::class,'createFacture']);
+
+    Route::post('save-facture', [ApiController::class,'saveFacture']);
+
+    Route::post('create-avance', [ApiController::class,'createAvance']);
+
+    Route::post('create-autre', [ApiController::class,'createAutre']);
+
+    Route::get('get-bon-caisse', [ApiController::class,'getBonCaisse']);
+
+    Route::post('update-bon-caisse/{id}/{beneficiaire_id}', [ApiController::class,'updateBonCaisse']);
+
 });
 
 //routes for bon_versement

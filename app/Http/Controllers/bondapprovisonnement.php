@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\bonapprovisionnemnt;
+use App\Models\bonapprovisionnemnt as BonApproVisionnement;
 use Illuminate\Http\Request;
 
 class bondapprovisonnement extends Controller
@@ -28,7 +28,7 @@ class bondapprovisonnement extends Controller
      {
          //
      }
- 
+
      /**
       * Store a newly created resource in storage.
       *
@@ -48,7 +48,7 @@ class bondapprovisonnement extends Controller
         ]);
 
         // On crée un bon d'approvisionnement
-        $bonApprovisionnement = bondapprovisonnement::create([
+        $bonApprovisionnement = BonApproVisionnement::create([
             'code' => $request->name,
             'date_appro' => $request->email,
             'object' => $request->object,
@@ -61,7 +61,7 @@ class bondapprovisonnement extends Controller
         // On retourne les informations du bon  en JSON
         return response()->json($bonApprovisionnement, 201);
         }
-    
+
 
     /**
      * Display the specified resource.
@@ -69,7 +69,7 @@ class bondapprovisonnement extends Controller
      * @param  \App\Models\bonapprovisionnemnt  $bonapprovisionnemnt
      * @return \Illuminate\Http\Response
      */
-    public function show(bonapprovisionnemnt $bonapprovisionnemnt)
+    public function show(BonApproVisionnement $bonapprovisionnemnt)
     {
         return response()->json($bonapprovisionnemnt);
     }
@@ -81,7 +81,7 @@ class bondapprovisonnement extends Controller
      * @param  \App\Models\bonapprovisionnemnt  $bonapprovisionnemnt
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, bonapprovisionnemnt $bonapprovisionnemnt)
+    public function update(Request $request, BonApproVisionnement $bonapprovisionnemnt)
     {
         // La validation de donnée
         $this->validate($request, [
@@ -113,7 +113,7 @@ class bondapprovisonnement extends Controller
      * @param  \App\Models\bonapprovisionnemnt  $bonapprovisionnemnt
      * @return \Illuminate\Http\Response
      */
-    public function destroy(bonapprovisionnemnt $bonapprovisionnemnt)
+    public function destroy(BonApproVisionnement $bonapprovisionnemnt)
     {
               // On supprime le bon
               $bonapprovisionnemnt->delete();
@@ -121,6 +121,6 @@ class bondapprovisonnement extends Controller
               // On retourne la réponse JSON
               return response()->json();
     }
-    
-}             
+
+}
 

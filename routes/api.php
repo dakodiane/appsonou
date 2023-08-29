@@ -44,5 +44,13 @@ Route::group([
 
     Route::post('update-bon-caisse/{id}/{beneficiaire_id}', [ApiController::class,'updateBonCaisse']);
 
+    // Bon approvisionnement
+
+    Route::post('create-bon-approvisionnement', [ApiController::class,'createBonAp']);
+
+    Route::post('update-bon-approvisionnement/{id}', [ApiController::class,'updateBonAp']);
+
+    Route::post('delete-bon-approvisionnement/{id}', [ApiController::class,'deleteBonAp']);
+
 });
 

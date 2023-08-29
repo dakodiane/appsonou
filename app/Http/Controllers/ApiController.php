@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\bonapprovisionnemnt as BonApprovisionnement;
+
 class ApiController extends Controller
 {
     //
@@ -82,6 +84,37 @@ class ApiController extends Controller
         $controller = new BonCaisseController;
 
         return $controller->update($request,$id,$beneficiaire_id);
+
+    }
+
+    // Bon appro
+
+    public function createBonAp(Request $request)
+    {
+        $controller = new bondapprovisonnement;
+
+        return $controller->store($request);
+    }
+
+    public function updateBonAp(Request $request, $id)
+    {
+
+        $bon = BonApprovisionnement::find($id);
+
+        $controller = new bondapprovisonnement;
+
+        return $controller->update($request,$bon);
+
+    }
+
+    public function deleteBonAp(Request $request, $id)
+    {
+
+        $bon = BonApprovisionnement::find($id);
+
+        $controller = new bondapprovisonnement;
+
+        return $controller->destroy($bon);
 
     }
 

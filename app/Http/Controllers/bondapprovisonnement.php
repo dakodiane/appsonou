@@ -38,28 +38,39 @@ class bondapprovisonnement extends Controller
     public function store(Request $request)
     {
             // La validation de données
-            $this->validate($request, [
-                'code' => 'required',
-                'date_appro' => 'required|date',
-                'objet' => 'required',
-                'montant' => 'required|numeric',
-                'mode' => 'required',
-                'user_id' => 'required|exists:users,id',
-        ]);
 
-        // On crée un bon d'approvisionnement
-        $bonApprovisionnement = BonApproVisionnement::create([
-            'code' => $request->name,
-            'date_appro' => $request->email,
-            'object' => $request->object,
-            'montant' => $request->montant,
-            'mode' => $request->mode,
-            'user_id' => $request->user_id,
 
-        ]);
+            // On retourne les informations du bon  en JSON
 
-        // On retourne les informations du bon  en JSON
-        return response()->json($bonApprovisionnement, 201);
+            try {
+
+                $this->validate($request, [
+                    'code' => 'required',
+                    'date_appro' => 'required|date',
+                    'objet' => 'required',
+                    'montant' => 'required|numeric',
+                    'mode' => 'required',
+                    'user_id' => 'required|exists:users,id',
+                ]);
+
+            // On crée un bon d'approvisionnement
+                $bonApprovisionnement = BonApproVisionnement::create([
+                    'code' => $request->name,
+                    'date_appro' => $request->email,
+                    'object' => $request->object,
+                    'montant' => $request->montant,
+                    'mode' => $request->mode,
+                    'user_id' => $request->user_id,
+
+                ]);
+
+                // On retourne la réponse JSON
+                return response()->json($bonApprovisionnement, 201);
+
+            } catch (\Throwable $th) {
+                return response()->json(['message' => $th->getMessage()],200);
+            }
+
         }
 
 
@@ -84,27 +95,36 @@ class bondapprovisonnement extends Controller
     public function update(Request $request, BonApproVisionnement $bonapprovisionnemnt)
     {
         // La validation de donnée
-        $this->validate($request, [
-            'code' => 'required',
-            'date_appro' => 'required|date',
-            'objet' => 'required',
-            'montant' => 'required|numeric',
-            'mode' => 'required',
-            'user_id' => 'required|exists:users,id',
-    ]);
 
-    // On modifie les informations du bon
-    $bonapprovisionnemnt->update([
-            'code' => $request->name,
-            'date_appro' => $request->email,
-            'object' => $request->object,
-            'montant' => $request->montant,
-            'mode' => $request->mode,
-            'user_id' => $request->user_id,
-    ]);
 
-    // On retourne la réponse JSON
-    return response()->json();
+        // On modifie les informations du bon
+
+        try {
+
+            $this->validate($request, [
+                'code' => 'required',
+                'date_appro' => 'required|date',
+                'objet' => 'required',
+                'montant' => 'required|numeric',
+                'mode' => 'required',
+                'user_id' => 'required|exists:users,id',
+            ]);
+
+            $bonapprovisionnemnt->update([
+                'code' => $request->name,
+                'date_appro' => $request->email,
+                'object' => $request->object,
+                'montant' => $request->montant,
+                'mode' => $request->mode,
+                'user_id' => $request->user_id,
+            ]);
+
+            // On retourne la réponse JSON
+            return response()->json([],200);
+
+        } catch (\Throwable $th) {
+            return response()->json(['message' => $th->getMessage()],200);
+        }
     }
 
     /**
@@ -116,10 +136,18 @@ class bondapprovisonnement extends Controller
     public function destroy(BonApproVisionnement $bonapprovisionnemnt)
     {
               // On supprime le bon
-              $bonapprovisionnemnt->delete();
+
+            try {
+
+                $bonapprovisionnemnt->delete();
 
               // On retourne la réponse JSON
-              return response()->json();
+              return response()->json([],200);
+
+            } catch (\Throwable $th) {
+                return response()->json(['message' => $th->getMessage()],200);
+            }
+
     }
 
 }

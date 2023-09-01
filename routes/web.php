@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 
 Route::resource('beneficiaires', 'BeneficiaireController');
+Route::resource('categorie', 'CategorieController');
+

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Beneficiaire;
+use App\Models\Categorie;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
@@ -82,6 +84,50 @@ class ApiController extends Controller
         $controller = new BonCaisseController;
 
         return $controller->update($request,$id,$beneficiaire_id);
+
+    }
+
+    // Catégories
+
+    public function createCategorie(Request $request)
+    {
+
+        $controller = new CategorieController;
+
+        return $controller->create($request);
+
+    }
+
+    public function updateCategorie(Request $request)
+    {
+
+        $category = Categorie::find($request->caterorie_id);
+
+        $controller = new CategorieController;
+
+        return $controller->update($request, $category);
+
+    }
+
+    // Bénéficiaire
+
+    public function createBeneficiaire(Request $request)
+    {
+
+        $controller = new beneficiairesController;
+
+        return $controller->create($request);
+
+    }
+
+    public function updateBeneficiaire(Request $request)
+    {
+
+        $beneficiaire = Beneficiaire::find($request->beneficiaire_id);
+
+        $controller = new beneficiairesController;
+
+        return $controller->update($request, $beneficiaire);
 
     }
 

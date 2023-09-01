@@ -44,5 +44,17 @@ Route::group([
 
     Route::post('update-bon-caisse/{id}/{beneficiaire_id}', [ApiController::class,'updateBonCaisse']);
 
+    // Catégorie
+
+    Route::post('create-categorie', [ApiController::class,'createCategorie']);
+
+    Route::post('update-categorie', [ApiController::class,'updateCategorie']);
+
+    // Bénéficiaire
+
+    Route::post('create-benficiaire', [ApiController::class,'createBeneficiaire']);
+
+    Route::post('update-benficiaire', [ApiController::class,'updateBeneficiaire']);
+
 });
 

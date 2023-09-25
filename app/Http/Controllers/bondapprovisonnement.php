@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 use App\Models\bonapprovisionnemnt as BonApproVisionnement;
+=======
+use App\Models\bonapprovisionnemnt;
+>>>>>>> rebase-copy
 use Illuminate\Http\Request;
 
 class bondapprovisonnement extends Controller
@@ -28,7 +32,11 @@ class bondapprovisonnement extends Controller
      {
          //
      }
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> rebase-copy
      /**
       * Store a newly created resource in storage.
       *
@@ -38,6 +46,7 @@ class bondapprovisonnement extends Controller
     public function store(Request $request)
     {
             // La validation de données
+<<<<<<< HEAD
 
 
             // On retourne les informations du bon  en JSON
@@ -73,6 +82,32 @@ class bondapprovisonnement extends Controller
 
         }
 
+=======
+            $this->validate($request, [
+                'code' => 'required',
+                'date_appro' => 'required|date',
+                'objet' => 'required',
+                'montant' => 'required|numeric',
+                'mode' => 'required',
+                'user_id' => 'required|exists:users,id',
+        ]);
+
+        // On crée un bon d'approvisionnement
+        $bonApprovisionnement = bondapprovisonnement::create([
+            'code' => $request->name,
+            'date_appro' => $request->email,
+            'object' => $request->object,
+            'montant' => $request->montant,
+            'mode' => $request->mode,
+            'user_id' => $request->user_id,
+
+        ]);
+
+        // On retourne les informations du bon  en JSON
+        return response()->json($bonApprovisionnement, 201);
+        }
+    
+>>>>>>> rebase-copy
 
     /**
      * Display the specified resource.
@@ -80,7 +115,11 @@ class bondapprovisonnement extends Controller
      * @param  \App\Models\bonapprovisionnemnt  $bonapprovisionnemnt
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function show(BonApproVisionnement $bonapprovisionnemnt)
+=======
+    public function show(bonapprovisionnemnt $bonapprovisionnemnt)
+>>>>>>> rebase-copy
     {
         return response()->json($bonapprovisionnemnt);
     }
@@ -92,6 +131,7 @@ class bondapprovisonnement extends Controller
      * @param  \App\Models\bonapprovisionnemnt  $bonapprovisionnemnt
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function update(Request $request, BonApproVisionnement $bonapprovisionnemnt)
     {
         // La validation de donnée
@@ -125,6 +165,32 @@ class bondapprovisonnement extends Controller
         } catch (\Throwable $th) {
             return response()->json(['message' => $th->getMessage()],200);
         }
+=======
+    public function update(Request $request, bonapprovisionnemnt $bonapprovisionnemnt)
+    {
+        // La validation de donnée
+        $this->validate($request, [
+            'code' => 'required',
+            'date_appro' => 'required|date',
+            'objet' => 'required',
+            'montant' => 'required|numeric',
+            'mode' => 'required',
+            'user_id' => 'required|exists:users,id',
+    ]);
+
+    // On modifie les informations du bon
+    $bonapprovisionnemnt->update([
+            'code' => $request->name,
+            'date_appro' => $request->email,
+            'object' => $request->object,
+            'montant' => $request->montant,
+            'mode' => $request->mode,
+            'user_id' => $request->user_id,
+    ]);
+
+    // On retourne la réponse JSON
+    return response()->json();
+>>>>>>> rebase-copy
     }
 
     /**
@@ -133,6 +199,7 @@ class bondapprovisonnement extends Controller
      * @param  \App\Models\bonapprovisionnemnt  $bonapprovisionnemnt
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function destroy(BonApproVisionnement $bonapprovisionnemnt)
     {
               // On supprime le bon
@@ -151,4 +218,16 @@ class bondapprovisonnement extends Controller
     }
 
 }
+=======
+    public function destroy(bonapprovisionnemnt $bonapprovisionnemnt)
+    {
+              // On supprime le bon
+              $bonapprovisionnemnt->delete();
+
+              // On retourne la réponse JSON
+              return response()->json();
+    }
+    
+}             
+>>>>>>> rebase-copy
 

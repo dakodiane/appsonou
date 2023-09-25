@@ -52,5 +52,18 @@ Route::group([
 
     Route::post('delete-bon-approvisionnement/{id}', [ApiController::class,'deleteBonAp']);
 
+    // Catégorie
+
+    Route::post('create-categorie', [ApiController::class,'createCategorie']);
+
+    Route::post('update-categorie', [ApiController::class,'updateCategorie']);
+
+    // Bénéficiaire
+
+    Route::post('create-benficiaire', [ApiController::class,'createBeneficiaire']);
+
+    Route::post('update-benficiaire', [ApiController::class,'updateBeneficiaire']);
+
+
 });
 

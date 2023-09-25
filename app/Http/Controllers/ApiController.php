@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Beneficiaire;
+use App\Models\Categorie;
 use Illuminate\Http\Request;
 
 use App\Models\bonapprovisionnemnt as BonApprovisionnement;
@@ -87,6 +89,7 @@ class ApiController extends Controller
 
     }
 
+<<<<<<< HEAD
     // Bon appro
 
     public function createBonAp(Request $request)
@@ -115,6 +118,49 @@ class ApiController extends Controller
         $controller = new bondapprovisonnement;
 
         return $controller->destroy($bon);
+=======
+    // Catégories
+
+    public function createCategorie(Request $request)
+    {
+
+        $controller = new CategorieController;
+
+        return $controller->create($request);
+
+    }
+
+    public function updateCategorie(Request $request)
+    {
+
+        $category = Categorie::find($request->caterorie_id);
+
+        $controller = new CategorieController;
+
+        return $controller->update($request, $category);
+
+    }
+
+    // Bénéficiaire
+
+    public function createBeneficiaire(Request $request)
+    {
+
+        $controller = new beneficiairesController;
+
+        return $controller->create($request);
+
+    }
+
+    public function updateBeneficiaire(Request $request)
+    {
+
+        $beneficiaire = Beneficiaire::find($request->beneficiaire_id);
+
+        $controller = new beneficiairesController;
+
+        return $controller->update($request, $beneficiaire);
+>>>>>>> rebase-copy
 
     }
 

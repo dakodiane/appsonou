@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::resource('beneficiaires', 'BeneficiaireController');
-Route::resource('categorie', 'CategorieController');
+    return response()->json([
+        'message' => 'Unauthorized',
+        'status' => 403
+    ],200);
+})->name('login');
 

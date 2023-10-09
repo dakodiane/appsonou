@@ -55,7 +55,7 @@ class beneficiairesController extends Controller
             'tel' => 'required',
             'ifu' => 'required',
             'adresse' => 'required',
-            'poste' => 'required' .$beneficiaire->id,
+            'poste' => 'required',
         ]);
 
         $beneficiaire->update($validatedData);

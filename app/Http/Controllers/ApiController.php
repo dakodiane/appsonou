@@ -89,12 +89,11 @@ class ApiController extends Controller
 
     }
 
-<<<<<<< HEAD
     // Bon appro
 
     public function createBonAp(Request $request)
     {
-        $controller = new bondapprovisonnement;
+        $controller = new \App\Http\Controllers\bondapprovisonnement;
 
         return $controller->store($request);
     }
@@ -104,7 +103,7 @@ class ApiController extends Controller
 
         $bon = BonApprovisionnement::find($id);
 
-        $controller = new bondapprovisonnement;
+        $controller = new \App\Http\Controllers\bondapprovisonnement;
 
         return $controller->update($request,$bon);
 
@@ -115,10 +114,11 @@ class ApiController extends Controller
 
         $bon = BonApprovisionnement::find($id);
 
-        $controller = new bondapprovisonnement;
+        $controller = new \App\Http\Controllers\bondapprovisonnement;
 
         return $controller->destroy($bon);
-=======
+
+    }
     // Catégories
 
     public function createCategorie(Request $request)
@@ -126,7 +126,7 @@ class ApiController extends Controller
 
         $controller = new CategorieController;
 
-        return $controller->create($request);
+        return $controller->store($request);
 
     }
 
@@ -148,7 +148,7 @@ class ApiController extends Controller
 
         $controller = new beneficiairesController;
 
-        return $controller->create($request);
+        return $controller->store($request);
 
     }
 
@@ -160,7 +160,6 @@ class ApiController extends Controller
         $controller = new beneficiairesController;
 
         return $controller->update($request, $beneficiaire);
->>>>>>> rebase-copy
 
     }
 

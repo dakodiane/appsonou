@@ -46,7 +46,7 @@ class CategorieController extends Controller
     {
         $validatedData = $request->validate([
             'label' => 'required',
-            'slug' => 'required' .$categorie->id,
+            'slug' => 'required',
         ]);
 
         $categorie->update($validatedData);
